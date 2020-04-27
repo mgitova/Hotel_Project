@@ -67,11 +67,6 @@ const char& String::operator[] (size_t index) const
 	return this->arr[index];
 }
 
-void String::print() const 
-{
-	std::cout << this->arr << std::endl;
-}
-
 std::ostream& operator<< (std::ostream& out, const String& other)
 {
 	out << other.arr;

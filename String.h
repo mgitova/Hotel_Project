@@ -18,7 +18,7 @@ class String {
 		bool operator== (const String& other) const;
 		char& operator[](size_t index);
 		const char& operator[](size_t index) const;
-		void print() const;
+		
 		
 		friend std::ostream& operator<< (std::ostream& out, const String& other);
 };

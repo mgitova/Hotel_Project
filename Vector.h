@@ -1,11 +1,14 @@
 #pragma once 
+#include <iostream>
 #include <cassert>
+
+using namespace std;
 
 template <typename T>
 class Vector
 {
 private:
-	typedef unsigned int size_t;
+	//typedef unsigned int size_t;
 	size_t size;
 	size_t capacity;
 	T* arr;
@@ -22,6 +25,7 @@ public:
 	void removeElementAt(size_t index);
 	T& operator [] (size_t index);
 	const T& operator [] (size_t index) const;
+	size_t getSize() const;
 	
 };
 
@@ -101,6 +105,7 @@ void Vector<T>::addElement(const T& element)
 template <typename T>
 void Vector<T>::removeElementAt(size_t index)
 {
+	assert(index < this->size);
 	for (int i = index; i < this->size - 1; i++)
 	{
 		this->arr[i] = this->arr[i+1];
@@ -122,5 +127,10 @@ const T& Vector<T>::operator [] (size_t index) const
 	return this->arr[index];
 }
 
+template <typename T>
+size_t Vector<T>::getSize() const
+{
+	return this->size;	
+}
 
 
