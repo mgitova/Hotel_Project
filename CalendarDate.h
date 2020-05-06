@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 
+using namespace std;
+
 class CalendarDate
 {
 private:
-	typedef unsigned int size_t;
 	size_t day;
 	size_t month;
 	size_t year;

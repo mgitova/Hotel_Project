@@ -8,7 +8,6 @@ template <typename T>
 class Vector
 {
 private:
-	//typedef unsigned int size_t;
 	size_t size;
 	size_t capacity;
 	T* arr;

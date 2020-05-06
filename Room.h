@@ -13,9 +13,10 @@ class Room
 	Vector<CalendarDate> endDatesNormalClients;
 	Vector<String> notesNormalClients;
 	
-	Vector<CalendarDate> startDatesVIPclients;
-	Vector<CalendarDate> endDatesVIPclients;
-	Vector<String> notesVIPclients;
+	CalendarDate startDateVIPclient;
+	CalendarDate endDateVIPclient;
+	String noteVIPclient;
+	bool isVIPinRoom;
 	
 	bool isAvailable;
 	CalendarDate startDateUnavailability;
@@ -30,5 +31,13 @@ class Room
 	void removeNormalClientAtIndex(int index);
 	
 	void addVIPclient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note);
-	void removeVIPclientAtIndex(int index);
+	void removeVIPclient();
+	
+	void setUnavailability(const CalendarDate& startDate, const CalendarDate& endDate, const String& note);
+	void setRoomAsAvailable();
+	
+	int getNumberOfFreeBeds() const;
+	int getTotalNumberOfBeds() const;
+	
+	int getRoomNumber() const;
 };
