@@ -50,6 +50,20 @@ void Room::removeNormalClientAtIndex(int index)
 	}
 }
 
+void Room::removeAllNormalClients()
+{
+	if(this->startDatesNormalClients.getSize() > 0)
+	{
+		this->startDatesNormalClients = Vector<CalendarDate>();
+		this->endDatesNormalClients = Vector<CalendarDate>();
+		this->notesNormalClients = Vector<String>();	
+	}
+	else
+	{
+		cout << "There are no normal clients in the room" << endl;
+	}
+}
+
 void Room::addVIPclient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
 	if(!this->isVIPinRoom)
@@ -82,24 +96,46 @@ void Room::removeVIPclient()
 
 void Room::setUnavailability(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
-	assert(this->isAvailable);
-	assert(this->notesNormalClients.getSize() == 0);
-	assert(!this->isVIPinRoom);
+	if (this->isAvailable && this->notesNormalClients.getSize() == 0 && !this->isVIPinRoom)
+	{	
+		this->startDateUnavailability = startDate;
+		this->endDateUnavailability = endDate;
+		this->unavailabilityNote = note;
+		this->isAvailable = false;
+	}
+	else 
+	{
+		if(!this->isAvailable)
+		{
+			cout << "The room is already set as unavailable." << endl;
+		}
+		else 
+		{
+			cout << "Room is in use by clients." << endl;
+		}
+	}
 	
-	this->startDateUnavailability = startDate;
-	this->endDateUnavailability = endDate;
-	this->unavailabilityNote = note;
-	this->isAvailable = false;
 }
 
 void Room::setRoomAsAvailable()
 {
-	assert(!this->isAvailable);
-	this->isAvailable = false;
+	if(!this->isAvailable)
+	{
+		this->isAvailable = false;
+	}
+	else
+	{
+		cout << "Room is already available." << endl;
+	}
+	
 }
 
 int Room::getNumberOfFreeBeds() const
 {
+	if(isVIPinRoom)
+	{
+		return 0;
+	}
 	return this->totalNumberOfBeds - this->notesNormalClients.getSize();
 }
 
@@ -112,3 +148,32 @@ int Room::getRoomNumber() const
 {
 	return this->roomNumber;
 }
+
+bool Room::isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& dateEnd) const
+{
+	for (int i = 0; i < this->startDatesNormalClients.getSize();++i)
+	{
+		if(CalendarDate::areOverlapping(dateStart,dateEnd,this->startDatesNormalClients[i],this->endDatesNormalClients[i]))
+		{
+			return false;
+		}
+	}
+	
+	if(this->isVIPinRoom)
+	{
+		if(CalendarDate::areOverlapping(dateStart,dateEnd,this->startDateVIPclient,this->endDateVIPclient))
+		{
+			return false;
+		}
+	}
+	
+	if(!this->isAvailable)
+	{
+		if(CalendarDate::areOverlapping(dateStart,dateEnd,this->startDateUnavailability,this->endDateUnavailability))
+		{
+			return false;
+		}
+	}
+	return true;	
+}
+

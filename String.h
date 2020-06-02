@@ -18,6 +18,9 @@ class String {
 		bool operator== (const String& other) const;
 		char& operator[](size_t index);
 		const char& operator[](size_t index) const;
+		String operator+(const String& other) const;
+		
+		size_t getSize() const;
 		
 		
 		friend std::ostream& operator<< (std::ostream& out, const String& other);

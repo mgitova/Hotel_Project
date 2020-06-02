@@ -67,6 +67,21 @@ const char& String::operator[] (size_t index) const
 	return this->arr[index];
 }
 
+String String::operator+(const String& other) const
+{
+	char* arr = new char[strlen(this->arr) + strlen(other.arr) + 1];
+	strcpy(arr,this->arr);
+	strcat(arr,other.arr);
+	String result (arr);
+	delete[] arr;
+	return result;
+}
+
+size_t String::getSize() const
+{
+	return this->size;
+}
+
 std::ostream& operator<< (std::ostream& out, const String& other)
 {
 	out << other.arr;

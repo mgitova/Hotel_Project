@@ -1,8 +1,9 @@
 #include "CalendarDate.h"
 #include <cassert>
 #include <cstring>
+#include <ctime>
 
-CalendarDate::size_t CalendarDate::getDigit(char c) const
+size_t CalendarDate::getDigit(char c) const
 {
 	return c - '0';
 }
@@ -209,7 +210,7 @@ bool CalendarDate::operator!= (const CalendarDate& rhs) const
 
 std::ostream& operator<< (std::ostream& out, const CalendarDate& other)
 {
-	if(other.year >= 0 && other.year <= 9)
+	if(other.year <= 9)
 	{
 		out << "000" << other.year;		
 	}
@@ -237,4 +238,27 @@ std::ostream& operator<< (std::ostream& out, const CalendarDate& other)
 	return out;	
 }
 	
+CalendarDate CalendarDate::getDateToday()
+{
+	long long t = time(0);
+	std::tm* now = std::localtime(&t);
+	
+	CalendarDate result;
+	result.day = now->tm_mday;
+	result.month = now->tm_mon + 1;
+	result.year = now->tm_year + 1900;
+	
+	return result;
+}
 
+bool CalendarDate::areOverlapping(const CalendarDate& dateStart1, const CalendarDate& dateEnd1, 
+								const CalendarDate& dateStart2, const CalendarDate& dateEnd2)
+{
+	bool check1 = dateStart1 >= dateStart2 && dateStart1 <= dateEnd2;
+	bool check2 = dateEnd1 >= dateStart2 && dateEnd1 <= dateEnd2;
+	bool check3 = dateStart2 >= dateStart1 && dateStart2 <= dateEnd1;
+	bool check4 = dateEnd2 >= dateStart1 && dateEnd2 <= dateEnd1;
+	
+	return check1 || check2 || check3 || check4;
+}
+	

@@ -3,9 +3,12 @@
 #include "Vector.h"
 #include "CalendarDate.h"
 
+
 class Room
 {
 	private:
+	friend class Hotel;
+	
 	int totalNumberOfBeds;
 	int roomNumber;
 	
@@ -29,6 +32,7 @@ class Room
 	
 	void addNormalClient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note);
 	void removeNormalClientAtIndex(int index);
+	void removeAllNormalClients();
 	
 	void addVIPclient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note);
 	void removeVIPclient();
@@ -40,4 +44,8 @@ class Room
 	int getTotalNumberOfBeds() const;
 	
 	int getRoomNumber() const;
+	
+	bool isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& dateEnd) const;
+	
+
 };

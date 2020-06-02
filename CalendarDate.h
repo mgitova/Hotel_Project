@@ -13,6 +13,7 @@ private:
 	bool isDigit(char c) const;
 	bool isValid(const char* date) const;
 	bool isLeapYear(size_t year) const;
+	
 public:
 	CalendarDate();
 	//YYYY-MM-DD
@@ -26,5 +27,9 @@ public:
 	bool operator!= (const CalendarDate& rhs) const;
 	
 	friend std::ostream& operator<< (std::ostream& out, const CalendarDate& other);
+	
+	static CalendarDate getDateToday();
+	static bool areOverlapping(const CalendarDate& dateStart1, const CalendarDate& dateEnd1, 
+								const CalendarDate& dateStart2, const CalendarDate& dateEnd2);
 	
 };
