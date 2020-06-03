@@ -72,7 +72,7 @@ void Hotel::checkInNormal(int room, const CalendarDate& startDate, const Calenda
 
 void Hotel::checkInVIP(int room, const CalendarDate& startDate, const CalendarDate& endDate,const String& note)
 {
-	for(int i; i < this->rooms.getSize(); i++)
+	for(int i = 0; i < this->rooms.getSize(); i++)
 	{
 		if(this->rooms[i].getRoomNumber() == room)
 		{
@@ -190,6 +190,7 @@ int Hotel::findRoomEmergency(int bedCount, const CalendarDate& startDate, const 
 	int roomNumber = this->findRoom(bedCount, startDate, endDate);
 	if(roomNumber != -1)
 	{
+		cout << "Room number " << roomNumber << " is the most suitable room for the VIP. " << endl;		
 		return roomNumber;
 	}
 	//find room with normal clients and minimum beds >= bedCount
@@ -209,6 +210,7 @@ int Hotel::findRoomEmergency(int bedCount, const CalendarDate& startDate, const 
 	
 	if(!isRoomFound)
 	{
+		cout << "There is no suitable room for the VIP." << endl;
 		return -1;
 	}
 	
@@ -224,13 +226,14 @@ int Hotel::findRoomEmergency(int bedCount, const CalendarDate& startDate, const 
 	//update report for clients for which there are no free beds
 	for (;i < this->rooms[roomIndex].notesNormalClients.getSize();++i)
 	{
+		cout << "A client has been removed from the hotel because of the demands of the VIP." << endl;
 		ReportRecord rec1 (this->rooms[roomIndex].endDatesNormalClients[i], String (" normal client checked out from room because VIP needs room urgently, note : ") + this->rooms[roomIndex].notesNormalClients[i], this->rooms[roomIndex].getRoomNumber());
 		this->report.addElement(rec1);	
 	}
 	
 	//remove clients from the old room
 	this->rooms[roomIndex].removeAllNormalClients();
-	
+	cout << "Room number " << this->rooms[roomIndex].getRoomNumber() << " is the most suitable room for the VIP. " << endl;	
 	return roomIndex;	
 }
 

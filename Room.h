@@ -50,11 +50,13 @@ class Room
 	void print() const
 	{
 		cout << "Room " << getRoomNumber() << endl;
+		cout << "Normal clients " << endl;
 		for (int i = 0; i < this->startDatesNormalClients.getSize(); ++i)
 		{
 			cout << startDatesNormalClients[i] << " , " << endDatesNormalClients[i] << " , " << notesNormalClients[i] << endl;
 		}
 		
+		cout << "VIP" << endl;
 		if(isVIPinRoom)
 		{
 			cout << startDateVIPclient << " , " << endDateVIPclient << " , " << noteVIPclient << endl;

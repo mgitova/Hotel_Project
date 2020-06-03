@@ -66,12 +66,17 @@ void Room::removeAllNormalClients()
 
 void Room::addVIPclient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
-	if(!this->isVIPinRoom)
+	if(this->startDatesNormalClients.getSize() > 0)
+	{
+		cout << "The room is in use by clients" << endl;
+	}	
+	else if(!this->isVIPinRoom)
 	{
 		this->startDateVIPclient = startDate;
 		this->endDateVIPclient = endDate;
 		this->noteVIPclient = note;
 		this->isVIPinRoom = true;
+		cout << "VIP has checked in" << endl;
 	}
 	else
 	{
@@ -175,6 +180,7 @@ bool Room::isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& 
 			return false;
 		}
 	}
+
 	return true;	
 }
 

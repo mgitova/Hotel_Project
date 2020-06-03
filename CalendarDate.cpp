@@ -3,17 +3,17 @@
 #include <cstring>
 #include <ctime>
 
-size_t CalendarDate::getDigit(char c) const
+size_t CalendarDate::getDigit(char c) 
 {
 	return c - '0';
 }
 
-bool CalendarDate::isDigit(char c) const
+bool CalendarDate::isDigit(char c) 
 {
 	return c >= '0' && c <= '9';
 }
 
-bool CalendarDate::isLeapYear (size_t year) const
+bool CalendarDate::isLeapYear (size_t year) 
 {
 	if(year % 4 == 0)
 	{
@@ -28,103 +28,6 @@ bool CalendarDate::isLeapYear (size_t year) const
 		return true;
 	}
 	return false;
-	
-}
-
-bool CalendarDate::isValid(const char* date) const
-{
-	if (date == nullptr)
-	{
-		return false;
-	}
-	
-	size_t length = strlen(date);
-	if (length != 10)
-	{
-		return false;
-	}
-
-	//check year
-	for(int i = 0; i < 4; i++)
-	{
-		if (!this->isDigit(date[i]))
-		{
-			return false;
-		}
-	}
-
-	if (date[4] != '-')
-	{
-		return false;
-	}
-	
-	//check month
-	if(!this->isDigit(date[5]) && !this->isDigit(date[6]))
-	{
-		return false;
-	}
-
-	if (date[7] != '-')
-	{
-		return false;
-	}
-
-	//check day
-	if(!this->isDigit(date[8]) && !this->isDigit(date[9]))
-	{
-		return false;
-	}
-	
-	size_t year = getDigit(date[0])*1000 + getDigit(date[1])*100 + getDigit(date[2])*10 + getDigit(date[3]);
-	size_t month = getDigit(date[5])*10 + getDigit(date[6]);
-	size_t day =  getDigit(date[8])*10 + getDigit(date[9]);
-	
-	
-	if (month < 1 || month > 12)
-	{
-		return false;
-	}
-	
-	switch(month)
-	{
-		case 2: 
-		{
-			if(this->isLeapYear(year) && day > 29)
-			{
-				return false;
-			}
-			
-			if (!(this->isLeapYear(year)) && day > 28)
-			{
-				return false;
-			}
-			
-			break;
-		}
-		case 1: 
-		case 3: 
-		case 5:
-		case 7:
-		case 8:
-		case 10:
-		case 12: 
-		{
-			if (day > 31)
-			{
-				return false;
-			}
-			break;
-		}
-		default:
-		{
-			if(day > 30)
-			{ 
-				return false;
-			}
-		}	
-	}
-	
-	return true;	
 	
 }
 
@@ -206,6 +109,103 @@ bool CalendarDate::operator== (const CalendarDate& rhs) const
 bool CalendarDate::operator!= (const CalendarDate& rhs) const
 {
 	return !(rhs == *this);	
+}
+
+bool CalendarDate::isValid(const char* date) 
+{
+	if (date == nullptr)
+	{
+		return false;
+	}
+	
+	size_t length = strlen(date);
+	if (length != 10)
+	{
+		return false;
+	}
+
+	//check year
+	for(int i = 0; i < 4; i++)
+	{
+		if (!isDigit(date[i]))
+		{
+			return false;
+		}
+	}
+
+	if (date[4] != '-')
+	{
+		return false;
+	}
+	
+	//check month
+	if(!isDigit(date[5]) && !isDigit(date[6]))
+	{
+		return false;
+	}
+
+	if (date[7] != '-')
+	{
+		return false;
+	}
+
+	//check day
+	if(!isDigit(date[8]) && !isDigit(date[9]))
+	{
+		return false;
+	}
+	
+	size_t year = getDigit(date[0])*1000 + getDigit(date[1])*100 + getDigit(date[2])*10 + getDigit(date[3]);
+	size_t month = getDigit(date[5])*10 + getDigit(date[6]);
+	size_t day =  getDigit(date[8])*10 + getDigit(date[9]);
+	
+	
+	if (month < 1 || month > 12)
+	{
+		return false;
+	}
+	
+	switch(month)
+	{
+		case 2: 
+		{
+			if(isLeapYear(year) && day > 29)
+			{
+				return false;
+			}
+			
+			if (!(isLeapYear(year)) && day > 28)
+			{
+				return false;
+			}
+			
+			break;
+		}
+		case 1: 
+		case 3: 
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12: 
+		{
+			if (day > 31)
+			{
+				return false;
+			}
+			break;
+		}
+		default:
+		{
+			if(day > 30)
+			{ 
+				return false;
+			}
+		}	
+	}
+	
+	return true;	
+	
 }
 
 std::ostream& operator<< (std::ostream& out, const CalendarDate& other)

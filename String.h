@@ -16,11 +16,14 @@ class String {
 		~String();
 		
 		bool operator== (const String& other) const;
+		bool operator!= (const String& other) const;
 		char& operator[](size_t index);
 		const char& operator[](size_t index) const;
 		String operator+(const String& other) const;
+		String operator+(char c) const;
 		
 		size_t getSize() const;
+		const char* getStr() const;
 		
 		
 		friend std::ostream& operator<< (std::ostream& out, const String& other);

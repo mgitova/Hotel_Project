@@ -55,6 +55,12 @@ bool String::operator== (const String& other) const
 	return strcmp(this->arr,other.arr) == 0;
 }
 
+bool String::operator!= (const String& other) const
+{
+	return !(this->operator==(other));
+	//return !(*this == other)
+}
+
 char& String::operator[] (size_t index)
 {
 	assert(index < this->size);
@@ -77,9 +83,20 @@ String String::operator+(const String& other) const
 	return result;
 }
 
+String String::operator+(char c) const
+{
+	char arr[2] = {c,0};
+	return *this + String(arr);
+}
+
 size_t String::getSize() const
 {
 	return this->size;
+}
+
+const char* String::getStr() const
+{
+	return this->arr;
 }
 
 std::ostream& operator<< (std::ostream& out, const String& other)

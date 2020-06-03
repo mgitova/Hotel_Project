@@ -9,10 +9,9 @@ private:
 	size_t day;
 	size_t month;
 	size_t year;
-	size_t getDigit(char c) const;
-	bool isDigit(char c) const;
-	bool isValid(const char* date) const;
-	bool isLeapYear(size_t year) const;
+	static size_t getDigit(char c);
+	static bool isDigit(char c);
+	static bool isLeapYear(size_t year);
 	
 public:
 	CalendarDate();
@@ -25,6 +24,8 @@ public:
 	bool operator<= (const CalendarDate& rhs) const;
 	bool operator== (const CalendarDate& rhs) const;
 	bool operator!= (const CalendarDate& rhs) const;
+	
+	static bool isValid(const char* date);
 	
 	friend std::ostream& operator<< (std::ostream& out, const CalendarDate& other);
 	
