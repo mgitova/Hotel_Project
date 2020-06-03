@@ -88,3 +88,10 @@ std::ostream& operator<< (std::ostream& out, const String& other)
 	return out;
 }
 
+std::istream& operator>> (std::istream& in, String& other)
+{
+	char arr[1000];
+	in >> arr;
+	other = String(arr);
+	return in;		
+}

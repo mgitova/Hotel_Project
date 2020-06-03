@@ -24,4 +24,5 @@ class String {
 		
 		
 		friend std::ostream& operator<< (std::ostream& out, const String& other);
+		friend std::istream& operator>> (std::istream& in, String& other);
 };

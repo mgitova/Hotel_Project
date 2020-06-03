@@ -17,4 +17,9 @@ class ReportRecord
 	CalendarDate getDate() const;
 	String getDescription() const;
 	int getRoomNumber() const;
+	
+	void print() const
+	{
+		cout << date << description << roomNumber << endl;
+	}
 };

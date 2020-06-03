@@ -1,5 +1,20 @@
 #include "Hotel.h"
 
+Hotel::Hotel (const Vector<Room>& rooms) : rooms (rooms)
+{
+	for (int i = 0; i < rooms.getSize() ; ++i)
+	{
+		for (int j = i + 1; j < rooms.getSize(); ++j)
+		{
+			if(rooms[i].getRoomNumber() == rooms[j].getRoomNumber())
+			{
+				cout << "Number of room at index " << i << " is equal to number of room at index " << j << " = " << rooms[i].getRoomNumber() << endl;
+				assert(false);
+			}
+		}
+	}
+}
+
 Vector<int> Hotel::findClientReallocations(int roomIndex) const
 {
 	Vector<int> roomIndexesOfReallocatedClients = Vector<int>();
@@ -22,9 +37,14 @@ Vector<int> Hotel::findClientReallocations(int roomIndex) const
 
 //if guests == -1 , the client wants to use every bed in the room
 void Hotel::checkInNormal(int room, const CalendarDate& startDate, const CalendarDate& endDate, const String& note, int guests)
-{
-	for(int i; i < this->rooms.getSize(); i++)
+{	
+	for(int i = 0; i < this->rooms.getSize(); i++)
 	{
+		if(!this->rooms[i].isAvailable)
+		{
+			cout << "The room is unavailable for check-ins." << endl;
+			return;
+		}
 		if(this->rooms[i].getRoomNumber() == room)
 		{
 			if (guests == -1)
@@ -37,15 +57,17 @@ void Hotel::checkInNormal(int room, const CalendarDate& startDate, const Calenda
 				{
 					this->rooms[i].addNormalClient(startDate, endDate, note);
 				}
+				cout << "The guest" << (guests > 1 ? "s" : "") << (guests > 1 ? " have" : " has") <<" checked in." << endl;
 				return;
 			}
 			else
 			{
-				std::cout << "There is no enough beds in this room." << std::endl;	
+				std::cout << "There is no enough beds in this room." << std::endl;
+				return;	
 			}
 		}
 	}
-	std::cout << "There is no room with this number." << std::endl;	
+	std::cout << "There is no room with number " << room << std::endl;	
 }
 
 void Hotel::checkInVIP(int room, const CalendarDate& startDate, const CalendarDate& endDate,const String& note)
@@ -87,9 +109,14 @@ void Hotel::checkOut(int roomNumber)
 	{
 		if(this->rooms[i].getRoomNumber() == roomNumber)
 		{
-			
+			if (!this->rooms[i].isVIPinRoom && this->rooms[i].startDatesNormalClients.getSize() == 0)
+			{
+				cout << "The room is already empty" << endl;
+				return;
+			}
 			if(this->rooms[i].isVIPinRoom)
 			{
+				cout << "The VIP client is checked out." << endl;
 				ReportRecord rec1 (this->rooms[i].endDateVIPclient, String (" VIP client checked out from room, note : ") + this->rooms[i].noteVIPclient , this->rooms[i].getRoomNumber());
 				this->report.addElement(rec1);	
 				this->rooms[i].removeVIPclient();
@@ -103,6 +130,7 @@ void Hotel::checkOut(int roomNumber)
 					this->report.addElement(rec1);	
 				}
 				this->rooms[i].removeAllNormalClients();
+				cout << "The room is empty now." << endl;
 			}
 			return;
 		}
@@ -111,13 +139,20 @@ void Hotel::checkOut(int roomNumber)
 
 void Hotel::printReport(const CalendarDate& startDate, const CalendarDate& endDate) const
 {
+	bool isRecordFound = false;
 	for(int i = 0; i < this->report.getSize(); ++i)
 	{
 		if(CalendarDate::areOverlapping(startDate,endDate,this->report[i].getDate(), this->report[i].getDate()))
 		{
 			cout << report[i].getDate() << " room number " << report[i].getRoomNumber() << " : " << report[i].getDescription() << endl; 
+			isRecordFound = true;
 		}
 	}	
+	if(!isRecordFound)
+	{
+		cout << "There is no report" << endl;
+	}
+	
 }
 
 int Hotel::findRoom(int bedCount, const CalendarDate& startDate, const CalendarDate& endDate) const
@@ -209,3 +244,4 @@ void Hotel::setRoomAsUnavailable(int roomNumber, const CalendarDate& startDate, 
 		}
 	}
 }
+

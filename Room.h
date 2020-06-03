@@ -47,5 +47,25 @@ class Room
 	
 	bool isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& dateEnd) const;
 	
+	void print() const
+	{
+		cout << "Room " << getRoomNumber() << endl;
+		for (int i = 0; i < this->startDatesNormalClients.getSize(); ++i)
+		{
+			cout << startDatesNormalClients[i] << " , " << endDatesNormalClients[i] << " , " << notesNormalClients[i] << endl;
+		}
+		
+		if(isVIPinRoom)
+		{
+			cout << startDateVIPclient << " , " << endDateVIPclient << " , " << noteVIPclient << endl;
+		}
+		
+		if(!isAvailable)
+		{
+			cout << "Room is unavailable." << endl;
+		}
+	}
+	
+	
 
 };
