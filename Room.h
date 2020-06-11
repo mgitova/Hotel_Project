@@ -50,15 +50,19 @@ class Room
 	void print() const
 	{
 		cout << "Room " << getRoomNumber() << endl;
-		cout << "Normal clients " << endl;
-		for (int i = 0; i < this->startDatesNormalClients.getSize(); ++i)
-		{
-			cout << startDatesNormalClients[i] << " , " << endDatesNormalClients[i] << " , " << notesNormalClients[i] << endl;
-		}
 		
-		cout << "VIP" << endl;
+		if(this->startDatesNormalClients.getSize() > 0)
+		{
+			cout << "Normal clients " << endl;
+			for (int i = 0; i < this->startDatesNormalClients.getSize(); ++i)
+			{
+				cout << startDatesNormalClients[i] << " , " << endDatesNormalClients[i] << " , " << notesNormalClients[i] << endl;
+			}
+		}		
+				
 		if(isVIPinRoom)
 		{
+			cout << "VIP" << endl;
 			cout << startDateVIPclient << " , " << endDateVIPclient << " , " << noteVIPclient << endl;
 		}
 		
@@ -66,8 +70,11 @@ class Room
 		{
 			cout << "Room is unavailable." << endl;
 		}
+		else
+		{
+			cout << "Room is available." << endl;
+		}
 	}
-	
-	
+		
 
 };

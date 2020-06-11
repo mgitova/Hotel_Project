@@ -4,6 +4,12 @@ Hotel::Hotel (const Vector<Room>& rooms) : rooms (rooms)
 {
 	for (int i = 0; i < rooms.getSize() ; ++i)
 	{
+		assert(rooms[i].isAvailable);
+		assert(!rooms[i].isVIPinRoom);
+		assert(rooms[i].notesNormalClients.getSize() == 0);
+	}
+	for (int i = 0; i < rooms.getSize() ; ++i)
+	{
 		for (int j = i + 1; j < rooms.getSize(); ++j)
 		{
 			if(rooms[i].getRoomNumber() == rooms[j].getRoomNumber())
@@ -40,13 +46,14 @@ void Hotel::checkInNormal(int room, const CalendarDate& startDate, const Calenda
 {	
 	for(int i = 0; i < this->rooms.getSize(); i++)
 	{
-		if(!this->rooms[i].isAvailable)
-		{
-			cout << "The room is unavailable for check-ins." << endl;
-			return;
-		}
 		if(this->rooms[i].getRoomNumber() == room)
 		{
+			if(!this->rooms[i].isAvailable)
+			{
+				cout << "The room is unavailable for check-ins." << endl;
+				return;
+			}
+			
 			if (guests == -1)
 			{
 				guests = this->rooms[i].getTotalNumberOfBeds();

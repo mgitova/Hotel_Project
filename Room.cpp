@@ -103,7 +103,7 @@ void Room::setUnavailability(const CalendarDate& startDate, const CalendarDate& 
 {
 	if (this->isAvailable && this->notesNormalClients.getSize() == 0 && !this->isVIPinRoom)
 	{	
-		cout << "Set as unavailable" << endl;
+		cout << "The room is set as unavailable." << endl;
 		this->startDateUnavailability = startDate;
 		this->endDateUnavailability = endDate;
 		this->unavailabilityNote = note;

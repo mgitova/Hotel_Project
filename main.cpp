@@ -58,11 +58,6 @@ int main()
 	rooms.addElement(Room(5,102));
 	rooms.addElement(Room(3,103));
 	Hotel h = Hotel(rooms);
-	
-//	h.checkInNormal(101,"2020-06-03", "2020-06-04","Itovi",-1);
-//	h.print();
-//	h.checkOut(101);
-//	h.print();	
 
 	Vector<String> data;
 	char arr[1000];
@@ -311,7 +306,7 @@ int main()
 		}
 		else if (command == "unavailable")
 		{
-			if(data.getSize() != 4)
+			if(data.getSize() != 5)
 			{
 				cout << "Invalid parameter count" << endl;
 				continue;
@@ -343,7 +338,6 @@ int main()
 			{
 				cout << "Invalid date interval" << endl;
 			}
-			
 			
 			String note = data[4];
 						
