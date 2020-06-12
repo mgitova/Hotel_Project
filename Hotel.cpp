@@ -298,17 +298,17 @@ bool Hotel::readFromFile(std::istream& is)
 				
 		if(!isValid || !is.good())
 		{
-			//cout << "Invalid room detected" << endl;
+		//	cout << "Invalid room detected" << endl;
 			return false;
 		}
 		
 		this->rooms.addElement(currentRoom);
-		//cout << "Room read from file." << endl;
+	//	cout << "Room read from file." << endl;
 	}
 	
 	int reportCount;
 	is >> reportCount;
-	//cout << "ReportCount = " << reportCount << endl;
+//	cout << "ReportCount = " << reportCount << endl;
  	if(reportCount < 0)
 	{
 		return false;
@@ -336,9 +336,9 @@ bool Hotel::readFromFile(std::istream& is)
 		{
 			description = description + descriptionData[i] + " ";
 		}
-	//	cout << "Description = " << description << endl;
+		//cout << "Description = " << description << endl;
 		is >> roomNumber;
-	//	cout << "RoomNumber = " << roomNumber << endl;
+		//cout << "RoomNumber = " << roomNumber << endl;
 		is.ignore();
 				
 		if(!is.good())

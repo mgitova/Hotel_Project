@@ -249,10 +249,10 @@ bool Room::readFromFile(std::istream& is)
 	{
 		return false;
 	}
-//	cout << "notesNormalClientCount =" << notesNormalClientsCount << endl;
+	//cout << "notesNormalClientCount =" << notesNormalClientsCount << endl;
 	is.ignore();
-	this->startDatesNormalClients = Vector<CalendarDate>();
 	
+	this->startDatesNormalClients = Vector<CalendarDate>();
 	for(int i = 0; i < notesNormalClientsCount; ++i)
 	{
 		CalendarDate startDate;
@@ -266,6 +266,7 @@ bool Room::readFromFile(std::istream& is)
 		this->startDatesNormalClients.addElement(startDate);
 	}
 	
+	this->endDatesNormalClients = Vector<CalendarDate>();
 	for(int i = 0; i < notesNormalClientsCount; ++i)
 	{
 		CalendarDate endDate;
@@ -279,6 +280,7 @@ bool Room::readFromFile(std::istream& is)
 		this->endDatesNormalClients.addElement(endDate);
 	}
 
+	this->notesNormalClients = Vector<String>();
 	String note;
 	Vector<String> noteData;
 	char arr[1000];
@@ -330,7 +332,7 @@ bool Room::readFromFile(std::istream& is)
 			return false;
 		}
 		this->noteVIPclient = note;
-//		cout << "noteVIP = " << note<< endl;
+	//	cout << "noteVIP = " << note<< endl;
 	}
 
 	is >> this->isAvailable;
@@ -361,7 +363,7 @@ bool Room::readFromFile(std::istream& is)
 		{
 			note = note + noteData[i] + " ";
 		}
-//		cout << "noteUnavailbale =" << note << endl;
+	//	cout << "noteUnavailbale =" << note << endl;
 		if(!is.good())
 		{
 //			cout << "eof " << is.eof() << endl;
