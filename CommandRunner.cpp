@@ -3,28 +3,7 @@
 
 CommandRunner::CommandRunner()
 {
-	this->hotel = nullptr;
-}
-
-void CommandRunner::createDefaultHotel()
-{
-	Vector<Room> rooms = Vector<Room>(); 
-
-	rooms.addElement(Room(10,101));
-	rooms.addElement(Room(5,102));
-	rooms.addElement(Room(3,103));
 	
-	Hotel h = Hotel(rooms);
-	h.checkInNormal(102,"2020-03-23","2020-03-24","Georgievi",2);
-	h.checkInNormal(103, "2020-03-23", "2020-03-24","Belakovi",3);
-	char fileName[] = "hotel.txt";
-	ofstream writer(fileName);
-	h.writeToFile(writer);
-}
-
-void CommandRunner::setHotel(Hotel* ptr)
-{
-	this->hotel = ptr;
 }
 
 bool CommandRunner::isFileOpen() const
@@ -34,19 +13,11 @@ bool CommandRunner::isFileOpen() const
 
 void CommandRunner::run()
 {
-//
-//	Vector<Room> rooms = Vector<Room>(); 
-//
-//	rooms.addElement(Room(10,101));
-//	rooms.addElement(Room(5,102));
-//	rooms.addElement(Room(3,103));
-//	
-	Hotel& h = *(this->hotel);
-//	h = Hotel(rooms);
+
+	Hotel& h = this->hotel; 
 	
 	Vector<String> data;
 	char arr[1000];
-	CommandRunner::createDefaultHotel();
 	
 	while(true)
 	{
@@ -61,7 +32,11 @@ void CommandRunner::run()
 
 		if(command == "checkin")
 		{
-			
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if (data.getSize() < 5)
 			{
 				cout << "There are too little arguments" << endl;
@@ -139,6 +114,11 @@ void CommandRunner::run()
 		}
 		else if (command == "availability")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			CalendarDate date;
 			if(data.getSize() == 1)
 			{
@@ -166,6 +146,11 @@ void CommandRunner::run()
 		}
 		else if (command == "checkout")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if(data.getSize() != 2)
 			{
 				cout << "Invalid parameter count" << endl;
@@ -186,6 +171,11 @@ void CommandRunner::run()
 		}
 		else if (command == "report")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if(data.getSize() != 3)
 			{
 				cout << "Invalid parameter count" << endl;
@@ -213,6 +203,11 @@ void CommandRunner::run()
 		}
 		else if (command == "find")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if(data.getSize() != 4)
 			{
 				cout << "Invalid parameter count" << endl;
@@ -221,9 +216,10 @@ void CommandRunner::run()
 			
 			bool isValid;
 			int beds = String::stringToInt(data[1],isValid);
-			if(!isValid && beds <= 0)
+			if(!isValid || beds <= 0)
 			{
 				cout << "Invalid number of beds" << endl;
+				continue;
 			}
 			
 						
@@ -257,6 +253,11 @@ void CommandRunner::run()
 		}
 		else if (command == "find!")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if(data.getSize() != 4)
 			{
 				cout << "Invalid parameter count" << endl;
@@ -265,9 +266,10 @@ void CommandRunner::run()
 			
 			bool isValid;
 			int beds = String::stringToInt(data[1],isValid);
-			if(!isValid && beds <= 0)
+			if(!isValid || beds <= 0)
 			{
 				cout << "Invalid number of beds" << endl;
+				continue;
 			}
 			
 						
@@ -293,6 +295,11 @@ void CommandRunner::run()
 		}
 		else if (command == "unavailable")
 		{
+			if(!this->isFileOpen())
+			{
+				cout << "No file opened."<< endl;
+				continue;
+			}
 			if(data.getSize() != 5)
 			{
 				cout << "Invalid parameter count" << endl;
@@ -330,10 +337,10 @@ void CommandRunner::run()
 						
 			h.setRoomAsUnavailable(room,dateFrom,dateTo,note);
 		}
-		else if (command == "print")
-		{
-			h.print();
-		}
+//		else if (command == "print")
+//		{
+//			h.print();
+//		}
 		else if(command == "save")
 		{
 			if (data.getSize() == 3)
@@ -361,7 +368,6 @@ void CommandRunner::run()
 			}
 			else if (data.getSize() == 1)
 			{
-				cout << "Test1 " << endl;
 				if(this->saveAs(this->currentFileName))
 				{
 					cout << "Successfully saved in file \"" << this->currentFileName << "\"" << endl;
@@ -408,12 +414,12 @@ void CommandRunner::run()
 		}
 		else
 		{
-			cout << " Invalid command " ;
-			for (int i = 1; i < data.getSize(); ++i)
+			cout << "Invalid command \"" ;
+			for (int i = 0; i < data.getSize() - 1; ++i)
 			{
-				cout << data[i];
+				cout << data[i] << " ";
 			}
-			cout << endl;
+			cout << data[data.getSize() - 1] << "\"" << endl;
 		}
 	}
 	cout << "Goodbye! =)" << endl;
@@ -432,7 +438,7 @@ bool CommandRunner::saveAs(const String& nameFile) const
 	{
 		return false;
 	}
-	this->hotel->writeToFile(writer);
+	this->hotel.writeToFile(writer);
 	return writer.good();
 }
 
@@ -440,13 +446,81 @@ void CommandRunner::open(const String& nameFile)
 {
 	if(this->isFileOpen())
 	{
-		cout << "The file \"" << nameFile << "\" is already opened." << endl;
+		cout << "The file \"" << this->currentFileName << "\" is already opened." << endl;
 		return;
 	}
 	ifstream reader(nameFile.getStr());
 	if(!reader.good())
 	{
-		cout << "The file \"" << nameFile << "\"can't be opened." << endl;
+		ofstream writer(nameFile.getStr());
+		if(!writer.good())
+		{
+			cout << "The file \"" << nameFile << "\" cannot be created." << endl;
+			return;
+		}
+		
+		cout << "Enter the number of rooms for the new hotel: " << endl;
+		int roomCount;
+		cin >> roomCount;
+		cin.ignore();
+		if(roomCount < 0)
+		{
+			cout << "Room count has to be at least one." << endl;
+			return;
+		}
+		if(!cin.good())
+		{
+			cout << "Invalid room count. " << endl;
+			//clear error flags from cin
+			cin.clear();
+			return;
+		}
+		
+		Vector<Room> rooms;
+		for (int i = 0; i < roomCount; ++i)
+		{
+			cout << "Enter room number for the current room: " << endl;
+			int roomNumber;
+			cin >> roomNumber;
+			cin.ignore();
+			if(roomNumber < 0)
+			{
+				cout << "Room number has to be a positive number." << endl;
+				return;
+			}
+			if(!cin.good())
+			{
+				cout << "Invalid room number. " << endl;
+				//clear error flags from cin
+				cin.clear();
+				return;
+			}
+			
+			cout << "Enter total number of beds in the current room: " << endl;
+			int totalNumberOfBeds;
+			cin >> totalNumberOfBeds;
+			cin.ignore();
+			if(totalNumberOfBeds < 0)
+			{
+				cout << "Total number of beds has to be a positive number." << endl;
+				return;
+			}
+			if(!cin.good())
+			{
+				cout << "Invalid total number of beds. " << endl;
+				//clear error flags from cin
+				cin.clear();
+				return;
+			}		
+			rooms.addElement(Room(totalNumberOfBeds, roomNumber));
+			
+		}
+		
+		
+		this->hotel = Hotel(rooms);
+		this->hotel.writeToFile(writer);
+		cout << "New hotel successfully created in file \"" << nameFile << "\"" << endl;
+		this->currentFileName = nameFile;
 		return;
 	}
 	//readHotel
@@ -454,7 +528,7 @@ void CommandRunner::open(const String& nameFile)
 	
 	if(input.readFromFile(reader) && reader.good())
 	{
-		*(this->hotel) = input;
+		this->hotel = input;
 		cout << "Successfully read a hotel from file \"" << nameFile << "\"" << endl;
 		this->currentFileName = nameFile;
 	}
@@ -470,7 +544,7 @@ void CommandRunner::close()
 {
 	if(this->isFileOpen())
 	{
-		this->currentFileName == "";
+		this->currentFileName = "";
 		cout << "Successfully closed without saving" << endl;
 	}
 	else

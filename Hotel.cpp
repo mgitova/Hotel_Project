@@ -260,7 +260,7 @@ void Hotel::setRoomAsUnavailable(int roomNumber, const CalendarDate& startDate, 
 	}
 }
 
-void Hotel::writeToFile(std::ostream& os)
+void Hotel::writeToFile(std::ostream& os) const
 {
 	os << this->rooms.getSize() << endl;
 	

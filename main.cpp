@@ -8,9 +8,7 @@ using namespace std;
 
 int main() 
 {
-	Hotel h;
 	CommandRunner runner;
-	runner.setHotel(&h);
 	runner.run();
 	
 	//https://github.com/mgitova/Hotel_Project_C-

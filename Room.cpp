@@ -185,7 +185,7 @@ bool Room::isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& 
 }
 
 
-void Room::writeToFile(std::ostream& os)
+void Room::writeToFile(std::ostream& os) const
 {
 	os << this->totalNumberOfBeds << endl;
 	os << this->roomNumber << endl;
