@@ -1,8 +1,10 @@
 #pragma once
+
+#include <iostream>
+
 #include "String.h"
 #include "Vector.h"
 #include "CalendarDate.h"
-
 
 class Room
 {
@@ -16,10 +18,10 @@ class Room
 	Vector<CalendarDate> endDatesNormalClients;
 	Vector<String> notesNormalClients;
 	
+	bool isVIPinRoom;
 	CalendarDate startDateVIPclient;
 	CalendarDate endDateVIPclient;
 	String noteVIPclient;
-	bool isVIPinRoom;
 	
 	bool isAvailable;
 	CalendarDate startDateUnavailability;
@@ -46,6 +48,10 @@ class Room
 	int getRoomNumber() const;
 	
 	bool isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& dateEnd) const;
+	
+	void writeToFile(std::ostream& os);
+	bool readFromFile(std::istream& is);
+	
 	
 	void print() const
 	{

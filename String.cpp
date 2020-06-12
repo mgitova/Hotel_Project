@@ -50,6 +50,54 @@ String::~String()
 	delete [] this->arr;
 }
 
+Vector<String> String::splitBySpace(const String& line)
+{
+	Vector<String> result;	
+	String currentParameter;
+	
+	for (int i = 0; i < line.getSize(); ++i)
+	{
+		if(line[i] == ' ')
+		{
+			if(currentParameter != "")
+			{
+				result.addElement(currentParameter);
+				currentParameter = "";
+			}
+		}	
+		else
+		{
+			currentParameter = currentParameter + line[i];
+		}
+	}
+	
+	if(currentParameter != "")
+	{
+		result.addElement(currentParameter);
+	}
+	
+	return result;	
+}
+
+int String::stringToInt(const String& s, bool& isValid)
+{
+	int num;
+	istringstream iss(s.getStr());
+	iss >> num;
+	if(iss.eof())
+	{
+		isValid = true;
+		return num;
+	}
+	else
+	{
+		isValid = false;
+		return -1;
+	}
+}
+
+
+
 bool String::operator== (const String& other) const 
 {
 	return strcmp(this->arr,other.arr) == 0;
@@ -105,10 +153,10 @@ std::ostream& operator<< (std::ostream& out, const String& other)
 	return out;
 }
 
-std::istream& operator>> (std::istream& in, String& other)
+std::istream& operator>> (std::istream& is, String& other)
 {
 	char arr[1000];
-	in >> arr;
+	is >> arr;
 	other = String(arr);
-	return in;		
+	return is;		
 }

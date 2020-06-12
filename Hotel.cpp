@@ -1,5 +1,10 @@
 #include "Hotel.h"
 
+Hotel::Hotel()
+{
+	
+}
+
 Hotel::Hotel (const Vector<Room>& rooms) : rooms (rooms)
 {
 	for (int i = 0; i < rooms.getSize() ; ++i)
@@ -255,3 +260,97 @@ void Hotel::setRoomAsUnavailable(int roomNumber, const CalendarDate& startDate, 
 	}
 }
 
+void Hotel::writeToFile(std::ostream& os)
+{
+	os << this->rooms.getSize() << endl;
+	
+	for(int i = 0; i < this->rooms.getSize(); ++i)
+	{
+		//print room in file
+		this->rooms[i].writeToFile(os);
+	}
+	os << this->report.getSize() << endl;
+	for(int i = 0; i < this->report.getSize(); ++i)
+	{
+		os << this->report[i].getDate() << endl;
+		os << this->report[i].getDescription() << endl;
+		os << this->report[i].getRoomNumber() << endl;
+	}	
+}
+
+bool Hotel::readFromFile(std::istream& is)
+{
+	int roomCount;	
+	is >> roomCount;
+//	cout << "RoomCount = " << roomCount << endl;
+	if(roomCount <= 0)
+	{
+		return false;
+	}
+	
+	is.ignore();
+	this->rooms = Vector<Room>();
+	Room currentRoom;
+	for(int i = 0; i < roomCount; ++i)
+	{
+		//read room from file
+		bool isValid = currentRoom.readFromFile(is);
+				
+		if(!isValid || !is.good())
+		{
+			//cout << "Invalid room detected" << endl;
+			return false;
+		}
+		
+		this->rooms.addElement(currentRoom);
+		//cout << "Room read from file." << endl;
+	}
+	
+	int reportCount;
+	is >> reportCount;
+	//cout << "ReportCount = " << reportCount << endl;
+ 	if(reportCount < 0)
+	{
+		return false;
+	}
+	is.ignore();
+	
+	this->report = Vector<ReportRecord>();
+	
+	CalendarDate date;
+	Vector<String> descriptionData;
+	String description;
+	int roomNumber;
+	char arr[1000];
+	
+	for(int i = 0; i < reportCount; ++i)
+	{
+		is >> date;
+		is.ignore();
+		is.getline(arr,1000);
+	//	cout << "Date= " << date << endl;
+		
+		descriptionData = String::splitBySpace(arr);
+		description = "";
+		for(int i = 0; i < descriptionData.getSize(); ++i)
+		{
+			description = description + descriptionData[i] + " ";
+		}
+	//	cout << "Description = " << description << endl;
+		is >> roomNumber;
+	//	cout << "RoomNumber = " << roomNumber << endl;
+		is.ignore();
+				
+		if(!is.good())
+		{
+//			cout << "eof " << is.eof() << endl;
+//			cout << "bad " << is.bad() << endl;
+//			cout << "fail " << is.fail() << endl;
+			return false;
+		}
+		
+		this->report.addElement(ReportRecord(date,description,roomNumber));
+	}
+
+	return is.good();
+}

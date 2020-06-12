@@ -115,6 +115,15 @@ void Vector<T>::removeElementAt(size_t index)
 template <typename T>
 T& Vector<T>::operator [] (size_t index)
 {
+	if(index >= this->size)
+	{
+		for (int i = 0; i < this->getSize(); ++i)
+		{
+			cout << this->arr[i] << endl;
+		}
+		cout << index << " >= "<< size << endl;
+	}
+	
 	assert(index < this->size);
 	return this->arr[index];
 }
@@ -122,6 +131,14 @@ T& Vector<T>::operator [] (size_t index)
 template <typename T>
 const T& Vector<T>::operator [] (size_t index) const
 {
+	if(index >= this->size)
+	{
+		for (int i = 0; i < this->getSize(); ++i)
+		{
+			cout << this->arr[i] << endl;
+		}
+		cout << index << " >= "<< size << endl;
+	}
 	assert(index < this->size);
 	return this->arr[index];
 }

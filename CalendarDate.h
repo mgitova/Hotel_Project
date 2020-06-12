@@ -28,6 +28,7 @@ public:
 	static bool isValid(const char* date);
 	
 	friend std::ostream& operator<< (std::ostream& out, const CalendarDate& other);
+	friend std::istream& operator>> (std::istream& in, CalendarDate& other);
 	
 	static CalendarDate getDateToday();
 	static bool areOverlapping(const CalendarDate& dateStart1, const CalendarDate& dateEnd1, 

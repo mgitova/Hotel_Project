@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <sstream> //https://www.cplusplus.com/reference/sstream/istringstream/istringstream/
+#include "Vector.h"
 using namespace std;
 
 class String {
@@ -14,6 +16,9 @@ class String {
 		String(const String& other);
 		String& operator= (const String& other);
 		~String();
+		
+		static Vector<String> splitBySpace(const String& line);
+	static int stringToInt(const String& s, bool& isValid);
 		
 		bool operator== (const String& other) const;
 		bool operator!= (const String& other) const;

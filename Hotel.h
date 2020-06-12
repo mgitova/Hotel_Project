@@ -11,6 +11,7 @@ class Hotel
 	Vector<int> findClientReallocations(int roomIndex) const;
 		
 	public:
+	Hotel();
 	Hotel(const Vector<Room>& rooms);
 	void checkInNormal(int room, const CalendarDate& startDate, const CalendarDate& endDate, const String& note, int guests);
 	void checkInVIP(int room, const CalendarDate& startDate, const CalendarDate& endDate,const String& note);
@@ -23,6 +24,8 @@ class Hotel
 	int findRoomEmergency(int bedCount, const CalendarDate& startDate, const CalendarDate& endDate) ;
 	
 	void setRoomAsUnavailable(int roomNumber, const CalendarDate& startDate, const CalendarDate& endDate,const String& note);
+	void writeToFile(std::ostream& os);
+	bool readFromFile(std::istream& is);
 	
 	void print() const
 	{

@@ -42,8 +42,8 @@ CalendarDate::CalendarDate(const char* date)
 {
 	assert(this->isValid(date));
 	this->year = getDigit(date[0])*1000 + getDigit(date[1])*100 + getDigit(date[2])*10 + getDigit(date[3]);
-	this->day = getDigit(date[5])*10 + getDigit(date[6]);
-	this->month = getDigit(date[8])*10 + getDigit(date[9]);
+	this->month = getDigit(date[5])*10 + getDigit(date[6]);
+	this->day = getDigit(date[8])*10 + getDigit(date[9]);
 	
 }
 
@@ -236,6 +236,24 @@ std::ostream& operator<< (std::ostream& out, const CalendarDate& other)
 	out << (other.day <= 9 ? "0" : "") << other.day;
 	
 	return out;	
+}
+
+std::istream& operator>> (std::istream& is, CalendarDate& other)
+{
+	char arr[1000];
+	is >> arr;
+	if(CalendarDate::isValid(arr))
+	{
+		other = CalendarDate(arr);
+	}
+	else
+	{
+		cout <<"\"" <<arr << "\" is invalid date" << endl;
+		other = CalendarDate();
+		is.setstate(std::ios_base::failbit);
+	}
+	return is;
+	
 }
 	
 CalendarDate CalendarDate::getDateToday()

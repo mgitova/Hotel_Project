@@ -184,3 +184,196 @@ bool Room::isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& 
 	return true;	
 }
 
+
+void Room::writeToFile(std::ostream& os)
+{
+	os << this->totalNumberOfBeds << endl;
+	os << this->roomNumber << endl;
+	os << this->notesNormalClients.getSize() << endl;
+	
+	for(int i = 0; i < this->notesNormalClients.getSize(); ++i)
+	{
+		os << this->startDatesNormalClients[i] << endl;
+	}
+	
+	for(int i = 0; i < this->notesNormalClients.getSize(); ++i)
+	{
+		os << this->endDatesNormalClients[i] << endl;
+	}
+	
+	for(int i = 0; i < this->notesNormalClients.getSize(); ++i)
+	{
+		os << this->notesNormalClients[i] << endl;
+	}
+	
+	os << this->isVIPinRoom << endl;
+	if(this->isVIPinRoom)
+	{
+		os << startDateVIPclient << endl;
+		os << endDateVIPclient << endl;
+		os << noteVIPclient << endl;
+	}
+	
+	os << this->isAvailable << endl;
+	if(!this->isAvailable)
+	{
+		os << startDateUnavailability << endl;
+		os << endDateUnavailability << endl;
+		os << unavailabilityNote << endl;
+	}
+	
+}
+
+bool Room::readFromFile(std::istream& is)
+{
+	is >> this->totalNumberOfBeds;
+	//cout << "totalNumber of beds =" << totalNumberOfBeds << endl;
+	if(this->totalNumberOfBeds <= 0)
+	{
+	//	cout << "Invalid totalNumberOfBeds" << endl;
+		return false;
+	}
+	is.ignore();
+	
+	is >> this->roomNumber;
+	//cout << "roomNumber = " << roomNumber << endl;
+	if(this->roomNumber <= 0)
+	{
+		return false;
+	}
+	is.ignore();
+	
+	int notesNormalClientsCount;
+	is >> notesNormalClientsCount;
+	if(notesNormalClientsCount < 0)
+	{
+		return false;
+	}
+//	cout << "notesNormalClientCount =" << notesNormalClientsCount << endl;
+	is.ignore();
+	this->startDatesNormalClients = Vector<CalendarDate>();
+	
+	for(int i = 0; i < notesNormalClientsCount; ++i)
+	{
+		CalendarDate startDate;
+		is >> startDate;
+	//	cout << "startDate =" << startDate << endl;
+		is.ignore();
+		if(!is.good())
+		{
+			return false;
+		}
+		this->startDatesNormalClients.addElement(startDate);
+	}
+	
+	for(int i = 0; i < notesNormalClientsCount; ++i)
+	{
+		CalendarDate endDate;
+		is >> endDate;
+	//	cout << "endDate =" << endDate << endl;
+		is.ignore();
+		if(!is.good())
+		{
+			return false;
+		}
+		this->endDatesNormalClients.addElement(endDate);
+	}
+
+	String note;
+	Vector<String> noteData;
+	char arr[1000];
+	
+	for(int i = 0; i < notesNormalClientsCount; ++i)
+	{
+		is.getline(arr,1000);
+		noteData = String::splitBySpace(arr);
+		note = "";
+		for(int i = 0; i < noteData.getSize(); ++i)
+		{
+		
+			note = note + noteData[i] + " ";
+		}
+		this->notesNormalClients.addElement(note);
+	//	cout << "notesNormalClients =" << note << endl;
+	}
+	
+	is >> this->isVIPinRoom;
+	//cout << "isVIPinROOm = " << isVIPinRoom << endl;
+	if(!is.good())
+	{
+		return false;
+	}
+	
+	if(this->isVIPinRoom)
+	{
+		is >> startDateVIPclient;
+		is.ignore();
+	//	cout << "startDateVIPclient = " << startDateVIPclient << endl;
+		is >> endDateVIPclient;
+		is.ignore();
+	//	cout << "endDateVIPclient = " << endDateVIPclient << endl;
+		
+		String note;
+		Vector<String> noteData;
+		char arr[1000];
+		is.getline(arr,1000);
+		noteData = String::splitBySpace(arr);
+		note = "";
+		
+		for(int i = 0; i < noteData.getSize(); ++i)
+		{
+			note = note + noteData[i] + " ";
+		}
+		
+		if(!is.good())
+		{
+			return false;
+		}
+		this->noteVIPclient = note;
+//		cout << "noteVIP = " << note<< endl;
+	}
+
+	is >> this->isAvailable;
+	if(!is.good())
+	{
+		return false;
+	}
+	//cout << "isAvaialable =" << isAvailable << endl;
+	if(!this->isAvailable)
+	{		
+		is >> startDateUnavailability;
+		is.ignore();
+	//	cout << "startDateUnavailable =" << startDateUnavailability << endl;
+		is >> endDateUnavailability;
+	//	cout << "endDateUnavailbale =" << endDateUnavailability << endl;
+		is.ignore();
+		
+		String note;
+		Vector<String> noteData;
+		
+		char arr[1000];
+	//	cout << "Is stream good " << is.good() << endl;
+		is.getline(arr,1000);
+	//	cout << "Is stream good " << is.good() << endl;
+		noteData = String::splitBySpace(arr);
+		note = "";
+		for(int i = 0; i < noteData.getSize(); ++i)
+		{
+			note = note + noteData[i] + " ";
+		}
+//		cout << "noteUnavailbale =" << note << endl;
+		if(!is.good())
+		{
+//			cout << "eof " << is.eof() << endl;
+//			cout << "bad " << is.bad() << endl;
+//			cout << "fail " << is.fail() << endl;
+			return false;
+		}
+		//cout << "Test14 room" << endl;
+		this->unavailabilityNote = note;
+	}
+	return is.good();	
+}
+	
+
+
