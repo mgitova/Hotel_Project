@@ -117,10 +117,6 @@ T& Vector<T>::operator [] (size_t index)
 {
 	if(index >= this->size)
 	{
-//		for (int i = 0; i < this->getSize(); ++i)
-//		{
-//			cout << this->arr[i] << endl;
-//		}
 		cout << index << " >= "<< size << endl;
 	}
 	
@@ -133,10 +129,6 @@ const T& Vector<T>::operator [] (size_t index) const
 {
 	if(index >= this->size)
 	{
-//		for (int i = 0; i < this->getSize(); ++i)
-//		{
-//			cout << this->arr[i] << endl;
-//		}
 		cout << index << " >= "<< size << endl;
 	}
 	assert(index < this->size);

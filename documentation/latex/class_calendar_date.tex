@@ -1,0 +1,74 @@
+\hypertarget{class_calendar_date}{}\doxysection{Calendar\+Date Class Reference}
+\label{class_calendar_date}\index{CalendarDate@{CalendarDate}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_calendar_date_afe6a63083220c5c83365d2daa36ab41f}\label{class_calendar_date_afe6a63083220c5c83365d2daa36ab41f}} 
+\mbox{\hyperlink{class_calendar_date_afe6a63083220c5c83365d2daa36ab41f}{Calendar\+Date}} ()
+\begin{DoxyCompactList}\small\item\em default constructor -\/ the default date is 1970-\/01-\/01 \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_ad57703eeccda6eb17a42ac8095a9ecda}\label{class_calendar_date_ad57703eeccda6eb17a42ac8095a9ecda}} 
+\mbox{\hyperlink{class_calendar_date_ad57703eeccda6eb17a42ac8095a9ecda}{Calendar\+Date}} (const char $\ast$date)
+\begin{DoxyCompactList}\small\item\em parameterized constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_ae14ea51ac07516006e829a2c72860c24}\label{class_calendar_date_ae14ea51ac07516006e829a2c72860c24}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\item 
+\mbox{\Hypertarget{class_calendar_date_a3efae713f27f6b5d1c9d1c504df2c833}\label{class_calendar_date_a3efae713f27f6b5d1c9d1c504df2c833}} 
+bool {\bfseries operator$>$} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\item 
+\mbox{\Hypertarget{class_calendar_date_a81cadfe49a1fe59224768138326890b7}\label{class_calendar_date_a81cadfe49a1fe59224768138326890b7}} 
+bool \mbox{\hyperlink{class_calendar_date_a81cadfe49a1fe59224768138326890b7}{operator$>$=}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em lhs $>$= rhs \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a5814ced05cc632c0113810edf4905068}\label{class_calendar_date_a5814ced05cc632c0113810edf4905068}} 
+bool \mbox{\hyperlink{class_calendar_date_a5814ced05cc632c0113810edf4905068}{operator$<$=}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em lhs $<$= rhs \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a693c7d936132891f5a984fa7ff83f3d7}\label{class_calendar_date_a693c7d936132891f5a984fa7ff83f3d7}} 
+bool \mbox{\hyperlink{class_calendar_date_a693c7d936132891f5a984fa7ff83f3d7}{operator==}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\begin{DoxyCompactList}\small\item\em lhs == rhs \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a62ae9a0a33a31ba27f7f3e6a022787b7}\label{class_calendar_date_a62ae9a0a33a31ba27f7f3e6a022787b7}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&rhs) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_calendar_date_a622160bcc8d5ab362c4302da8bd0dd61}{is\+Valid}} (const char $\ast$date)
+\begin{DoxyCompactList}\small\item\em check whether the date is Valid \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a1125b7bdb40294f1de4bb02eea7686c0}\label{class_calendar_date_a1125b7bdb40294f1de4bb02eea7686c0}} 
+static \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \mbox{\hyperlink{class_calendar_date_a1125b7bdb40294f1de4bb02eea7686c0}{get\+Date\+Today}} ()
+\begin{DoxyCompactList}\small\item\em returns the current calendar date -\/ \href{http://www.cplusplus.com}{\texttt{ http\+://www.\+cplusplus.\+com}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a495fdbb36460077115a51d920b8a0420}\label{class_calendar_date_a495fdbb36460077115a51d920b8a0420}} 
+static bool \mbox{\hyperlink{class_calendar_date_a495fdbb36460077115a51d920b8a0420}{are\+Overlapping}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+Start1, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+End1, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+Start2, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+End2)
+\begin{DoxyCompactList}\small\item\em checks if two date periods overlap \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_calendar_date_ae187ee71c596b4d02683508b1a33a93e}\label{class_calendar_date_ae187ee71c596b4d02683508b1a33a93e}} 
+std\+::ostream \& \mbox{\hyperlink{class_calendar_date_ae187ee71c596b4d02683508b1a33a93e}{operator$<$$<$}} (std\+::ostream \&out, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&other)
+\begin{DoxyCompactList}\small\item\em output stream \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_calendar_date_a609fb17594e4165f838b46670d1432e2}\label{class_calendar_date_a609fb17594e4165f838b46670d1432e2}} 
+std\+::istream \& \mbox{\hyperlink{class_calendar_date_a609fb17594e4165f838b46670d1432e2}{operator$>$$>$}} (std\+::istream \&in, \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&other)
+\begin{DoxyCompactList}\small\item\em input stream \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_calendar_date_a622160bcc8d5ab362c4302da8bd0dd61}\label{class_calendar_date_a622160bcc8d5ab362c4302da8bd0dd61}} 
+\index{CalendarDate@{CalendarDate}!isValid@{isValid}}
+\index{isValid@{isValid}!CalendarDate@{CalendarDate}}
+\doxysubsubsection{\texorpdfstring{isValid()}{isValid()}}
+{\footnotesize\ttfamily bool Calendar\+Date\+::is\+Valid (\begin{DoxyParamCaption}\item[{const char $\ast$}]{date }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+check whether the date is Valid 
+
+Y\+Y\+Y\+Y-\/\+M\+M-\/\+DD
+
+check year
+
+check month
+
+check day
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Calendar\+Date.\+h\item 
+Calendar\+Date.\+cpp\end{DoxyCompactItemize}

@@ -17,7 +17,7 @@ public:
 	CalendarDate();
 	//YYYY-MM-DD
 	CalendarDate(const char* date);
-		
+	
 	bool operator< (const CalendarDate& rhs) const;
 	bool operator> (const CalendarDate& rhs) const;
 	bool operator>= (const CalendarDate& rhs) const;

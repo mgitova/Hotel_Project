@@ -1,0 +1,62 @@
+\hypertarget{class_room}{}\doxysection{Room Class Reference}
+\label{class_room}\index{Room@{Room}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_room_ac6ef93a7d9c3e1d624e025058d5f16ff}\label{class_room_ac6ef93a7d9c3e1d624e025058d5f16ff}} 
+\mbox{\hyperlink{class_room_ac6ef93a7d9c3e1d624e025058d5f16ff}{Room}} ()
+\begin{DoxyCompactList}\small\item\em default constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_aefb68a1791a9e64a5c9e28a966579e42}\label{class_room_aefb68a1791a9e64a5c9e28a966579e42}} 
+\mbox{\hyperlink{class_room_aefb68a1791a9e64a5c9e28a966579e42}{Room}} (int total\+Number\+Of\+Beds, int room\+Number)
+\begin{DoxyCompactList}\small\item\em parameterized constructor \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_aa5cf829b6b89dfab6d563a259fa7521e}\label{class_room_aa5cf829b6b89dfab6d563a259fa7521e}} 
+void \mbox{\hyperlink{class_room_aa5cf829b6b89dfab6d563a259fa7521e}{add\+Normal\+Client}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&start\+Date, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&end\+Date, const \mbox{\hyperlink{class_string}{String}} \&note)
+\begin{DoxyCompactList}\small\item\em adds normal clients \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_afffa0bd5414992a1777dfab0b0b4fed9}\label{class_room_afffa0bd5414992a1777dfab0b0b4fed9}} 
+void \mbox{\hyperlink{class_room_afffa0bd5414992a1777dfab0b0b4fed9}{remove\+Normal\+Client\+At\+Index}} (int index)
+\begin{DoxyCompactList}\small\item\em removes normal clients at index \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_a9ee47769851dede6e5171784ac22c82c}\label{class_room_a9ee47769851dede6e5171784ac22c82c}} 
+void \mbox{\hyperlink{class_room_a9ee47769851dede6e5171784ac22c82c}{remove\+All\+Normal\+Clients}} ()
+\begin{DoxyCompactList}\small\item\em removes all normal clients \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_a1c0b2a84d778e97a0cc419969624ae04}\label{class_room_a1c0b2a84d778e97a0cc419969624ae04}} 
+void \mbox{\hyperlink{class_room_a1c0b2a84d778e97a0cc419969624ae04}{add\+V\+I\+Pclient}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&start\+Date, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&end\+Date, const \mbox{\hyperlink{class_string}{String}} \&note)
+\begin{DoxyCompactList}\small\item\em adds V\+IP client \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_acf6f6db696ba534d6cf8e9d6d6c2efa8}\label{class_room_acf6f6db696ba534d6cf8e9d6d6c2efa8}} 
+void \mbox{\hyperlink{class_room_acf6f6db696ba534d6cf8e9d6d6c2efa8}{remove\+V\+I\+Pclient}} ()
+\begin{DoxyCompactList}\small\item\em removes V\+IP client \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_a87eac91bacce0e9bf199e6d470df4eee}\label{class_room_a87eac91bacce0e9bf199e6d470df4eee}} 
+void \mbox{\hyperlink{class_room_a87eac91bacce0e9bf199e6d470df4eee}{set\+Unavailability}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&start\+Date, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&end\+Date, const \mbox{\hyperlink{class_string}{String}} \&note)
+\begin{DoxyCompactList}\small\item\em sets a room as unavailable \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_ae703b02a20ff0821310c0218bc6abdfe}\label{class_room_ae703b02a20ff0821310c0218bc6abdfe}} 
+void {\bfseries set\+Room\+As\+Available} ()
+\item 
+\mbox{\Hypertarget{class_room_aab8493ab451f2cb1aed949dbca7ecae1}\label{class_room_aab8493ab451f2cb1aed949dbca7ecae1}} 
+int {\bfseries get\+Number\+Of\+Free\+Beds} () const
+\item 
+\mbox{\Hypertarget{class_room_a6cbd9e49566b714020d9e8c0c9d00aed}\label{class_room_a6cbd9e49566b714020d9e8c0c9d00aed}} 
+int \mbox{\hyperlink{class_room_a6cbd9e49566b714020d9e8c0c9d00aed}{get\+Total\+Number\+Of\+Beds}} () const
+\begin{DoxyCompactList}\small\item\em returns the total number of beds in a room \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_a71e3d1c7ebefbbed7df0943477bce22f}\label{class_room_a71e3d1c7ebefbbed7df0943477bce22f}} 
+int \mbox{\hyperlink{class_room_a71e3d1c7ebefbbed7df0943477bce22f}{get\+Room\+Number}} () const
+\begin{DoxyCompactList}\small\item\em returns the number of the room \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_af046332c910975cc858fb5743a4728c6}\label{class_room_af046332c910975cc858fb5743a4728c6}} 
+bool \mbox{\hyperlink{class_room_af046332c910975cc858fb5743a4728c6}{is\+Available\+From\+To}} (const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+Start, const \mbox{\hyperlink{class_calendar_date}{Calendar\+Date}} \&date\+End) const
+\begin{DoxyCompactList}\small\item\em checks if one room is available from $<$date$>$ to $<$date$>$ \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_room_a2679b979b3f832e80059cbd58b7cfe55}\label{class_room_a2679b979b3f832e80059cbd58b7cfe55}} 
+void {\bfseries write\+To\+File} (std\+::ostream \&os) const
+\item 
+\mbox{\Hypertarget{class_room_a4b14bf05e41c3b3dd58c6e872d696a84}\label{class_room_a4b14bf05e41c3b3dd58c6e872d696a84}} 
+bool {\bfseries read\+From\+File} (std\+::istream \&is)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_room_a1bfb9405b1bae924eb7048faaffedf5e}\label{class_room_a1bfb9405b1bae924eb7048faaffedf5e}} 
+class {\bfseries Hotel}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Room.\+h\item 
+Room.\+cpp\end{DoxyCompactItemize}

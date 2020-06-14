@@ -1,10 +1,13 @@
 3
-10
+1
 101
-0
+1
+2020-06-10
+2020-06-20
+Borukovi 
 0
 1
-5
+2
 102
 0
 0
@@ -14,4 +17,25 @@
 0
 0
 1
-0
+7
+2020-01-01
+normal client checked out from room because VIP needs room urgently, note : note1 
+101
+2020-01-01
+Normal client checked out from room, note : note2 
+102
+2020-01-01
+Normal client checked out from room, note : note2 
+102
+2020-01-01
+VIP client checked out from room, note : note6 
+101
+2020-01-01
+Normal client checked out from room, note : note3 
+103
+2020-01-01
+Normal client checked out from room, note : note4 
+103
+2020-01-01
+Normal client checked out from room, note : note5 
+103

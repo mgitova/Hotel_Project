@@ -18,7 +18,7 @@ class String {
 		~String();
 		
 		static Vector<String> splitBySpace(const String& line);
-	static int stringToInt(const String& s, bool& isValid);
+		static int stringToInt(const String& s, bool& isValid);
 		
 		bool operator== (const String& other) const;
 		bool operator!= (const String& other) const;

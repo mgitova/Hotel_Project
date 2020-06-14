@@ -2,6 +2,7 @@
 #include "Room.h"
 #include <cassert>
 
+///default constructor
 Room::Room()
 {
 	this->totalNumberOfBeds = -1;
@@ -9,6 +10,7 @@ Room::Room()
 	this->isAvailable = false;
 }
 
+///parameterized constructor
 Room::Room(int totalNumberOfBeds, int roomNumber)
 {
 	assert(totalNumberOfBeds > 0 && roomNumber > 0);
@@ -18,6 +20,7 @@ Room::Room(int totalNumberOfBeds, int roomNumber)
 	this->isVIPinRoom = false;
 }
 
+///adds normal clients
 void Room::addNormalClient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
 	if(!this->isVIPinRoom && this->totalNumberOfBeds > this->notesNormalClients.getSize())
@@ -36,6 +39,7 @@ void Room::addNormalClient(const CalendarDate& startDate, const CalendarDate& en
 	}
 }
 
+///removes normal clients at index
 void Room::removeNormalClientAtIndex(int index)
 {
 	if(index < this->startDatesNormalClients.getSize() && index >= 0)
@@ -50,6 +54,7 @@ void Room::removeNormalClientAtIndex(int index)
 	}
 }
 
+///removes all normal clients
 void Room::removeAllNormalClients()
 {
 	if(this->startDatesNormalClients.getSize() > 0)
@@ -64,6 +69,7 @@ void Room::removeAllNormalClients()
 	}
 }
 
+///adds VIP client
 void Room::addVIPclient(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
 	if(this->startDatesNormalClients.getSize() > 0)
@@ -84,6 +90,7 @@ void Room::addVIPclient(const CalendarDate& startDate, const CalendarDate& endDa
 	}
 }
 
+///removes VIP client
 void Room::removeVIPclient()
 {
 	if(isVIPinRoom)
@@ -99,6 +106,7 @@ void Room::removeVIPclient()
 	}
 }
 
+///sets a room as unavailable
 void Room::setUnavailability(const CalendarDate& startDate, const CalendarDate& endDate, const String& note)
 {
 	if (this->isAvailable && this->notesNormalClients.getSize() == 0 && !this->isVIPinRoom)
@@ -121,21 +129,23 @@ void Room::setUnavailability(const CalendarDate& startDate, const CalendarDate& 
 		}
 	}
 	
-}
-
-void Room::setRoomAsAvailable()
-{
-	if(!this->isAvailable)
-	{
-		this->isAvailable = false;
-	}
-	else
-	{
-		cout << "Room is already available." << endl;
-	}
 	
 }
 
+//sets a room as available
+//void Room::setRoomAsAvailable()
+//{
+//	if(!this->isAvailable)
+//	{
+//		this->isAvailable = false;
+//	}
+//	else
+//	{
+//		cout << "Room is already available." << endl;
+//	}
+//}
+
+//returns the number of free beds in a room
 int Room::getNumberOfFreeBeds() const
 {
 	if(isVIPinRoom)
@@ -145,19 +155,22 @@ int Room::getNumberOfFreeBeds() const
 	return this->totalNumberOfBeds - this->notesNormalClients.getSize();
 }
 
+///returns the total number of beds in a room
 int Room::getTotalNumberOfBeds() const
 {
 	return this->totalNumberOfBeds;
 }
 
+///returns the number of the room
 int Room::getRoomNumber() const
 {
 	return this->roomNumber;
 }
 
+///checks if one room is available from <date> to <date> 
 bool Room::isAvailableFromTo(const CalendarDate& dateStart, const CalendarDate& dateEnd) const
 {
-	for (int i = 0; i < this->startDatesNormalClients.getSize();++i)
+	for (int i = 0; i < this->startDatesNormalClients.getSize(); ++i)
 	{
 		if(CalendarDate::areOverlapping(dateStart,dateEnd,this->startDatesNormalClients[i],this->endDatesNormalClients[i]))
 		{
@@ -220,8 +233,7 @@ void Room::writeToFile(std::ostream& os) const
 		os << startDateUnavailability << endl;
 		os << endDateUnavailability << endl;
 		os << unavailabilityNote << endl;
-	}
-	
+	}	
 }
 
 bool Room::readFromFile(std::istream& is)

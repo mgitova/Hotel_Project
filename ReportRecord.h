@@ -18,8 +18,10 @@ class ReportRecord
 	String getDescription() const;
 	int getRoomNumber() const;
 	
-	void print() const
-	{
-		cout << date << description << roomNumber << endl;
-	}
+	
+//	void print() const
+//	{
+//		cout << date << description << roomNumber << endl;
+//	}
+
 };

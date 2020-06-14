@@ -9,20 +9,23 @@
 class Room
 {
 	private:
-	friend class Hotel;
+	friend class Hotel; 
 	
 	int totalNumberOfBeds;
 	int roomNumber;
 	
+	//normal clients
 	Vector<CalendarDate> startDatesNormalClients;
 	Vector<CalendarDate> endDatesNormalClients;
 	Vector<String> notesNormalClients;
 	
+	//VIPclient
 	bool isVIPinRoom;
 	CalendarDate startDateVIPclient;
 	CalendarDate endDateVIPclient;
 	String noteVIPclient;
 	
+	//availability
 	bool isAvailable;
 	CalendarDate startDateUnavailability;
 	CalendarDate endDateUnavailability;

@@ -1,0 +1,62 @@
+\hypertarget{class_string}{}\doxysection{String Class Reference}
+\label{class_string}\index{String@{String}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_string_a3fba40cf6cb11735ffddc355a5ff68f4}\label{class_string_a3fba40cf6cb11735ffddc355a5ff68f4}} 
+{\bfseries String} (const char $\ast$str)
+\item 
+\mbox{\Hypertarget{class_string_afc158dffcdf56e601bd640cbacdfcd3c}\label{class_string_afc158dffcdf56e601bd640cbacdfcd3c}} 
+{\bfseries String} (const \mbox{\hyperlink{class_string}{String}} \&other)
+\item 
+\mbox{\Hypertarget{class_string_a734f34a0b7a42bcad30c368d6e8c5469}\label{class_string_a734f34a0b7a42bcad30c368d6e8c5469}} 
+\mbox{\hyperlink{class_string}{String}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_string}{String}} \&other)
+\item 
+\mbox{\Hypertarget{class_string_a3833f844a743166a7b9ad3d762aa3e5d}\label{class_string_a3833f844a743166a7b9ad3d762aa3e5d}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_string}{String}} \&other) const
+\item 
+\mbox{\Hypertarget{class_string_ae78b95bd3eb92f98cbca720266661a79}\label{class_string_ae78b95bd3eb92f98cbca720266661a79}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_string}{String}} \&other) const
+\item 
+\mbox{\Hypertarget{class_string_af1df131318966ea0bba5c6f603734600}\label{class_string_af1df131318966ea0bba5c6f603734600}} 
+char \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t index)
+\item 
+\mbox{\Hypertarget{class_string_a433ce8bc2e88d07f1865419fbf770ca5}\label{class_string_a433ce8bc2e88d07f1865419fbf770ca5}} 
+const char \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (size\+\_\+t index) const
+\item 
+\mbox{\Hypertarget{class_string_ac094f267da5e0cdc7559bb1fa163f650}\label{class_string_ac094f267da5e0cdc7559bb1fa163f650}} 
+\mbox{\hyperlink{class_string}{String}} {\bfseries operator+} (const \mbox{\hyperlink{class_string}{String}} \&other) const
+\item 
+\mbox{\Hypertarget{class_string_a0747b5aab5b107091f99b5d946c3bdfd}\label{class_string_a0747b5aab5b107091f99b5d946c3bdfd}} 
+\mbox{\hyperlink{class_string}{String}} {\bfseries operator+} (char c) const
+\item 
+\mbox{\Hypertarget{class_string_a7dd8d61589200aa51cef6dfa0d8dd08b}\label{class_string_a7dd8d61589200aa51cef6dfa0d8dd08b}} 
+size\+\_\+t {\bfseries get\+Size} () const
+\item 
+\mbox{\Hypertarget{class_string_aefb5a1654df92eb1110bcfb0d399fc65}\label{class_string_aefb5a1654df92eb1110bcfb0d399fc65}} 
+const char $\ast$ {\bfseries get\+Str} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_string_a69a0af3104707355460b6e6c633880b1}\label{class_string_a69a0af3104707355460b6e6c633880b1}} 
+static \mbox{\hyperlink{class_vector}{Vector}}$<$ \mbox{\hyperlink{class_string}{String}} $>$ {\bfseries split\+By\+Space} (const \mbox{\hyperlink{class_string}{String}} \&line)
+\item 
+\mbox{\Hypertarget{class_string_a63d5b0a0132321f6756f2923259b9132}\label{class_string_a63d5b0a0132321f6756f2923259b9132}} 
+static int {\bfseries string\+To\+Int} (const \mbox{\hyperlink{class_string}{String}} \&s, bool \&is\+Valid)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_string_aa502ffbb686e3afb50d589a70c53b460}\label{class_string_aa502ffbb686e3afb50d589a70c53b460}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&out, const \mbox{\hyperlink{class_string}{String}} \&other)
+\item 
+\mbox{\Hypertarget{class_string_a1dcf1ccb63221b2e6b84c943284d66b1}\label{class_string_a1dcf1ccb63221b2e6b84c943284d66b1}} 
+std\+::istream \& {\bfseries operator$>$$>$} (std\+::istream \&in, \mbox{\hyperlink{class_string}{String}} \&other)
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+String.\+h\item 
+String.\+cpp\end{DoxyCompactItemize}

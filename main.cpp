@@ -1,10 +1,8 @@
 #include <iostream>
-#include "Hotel.h"
 #include "CommandRunner.h"
-#include <fstream>
+
 
 using namespace std;
-
 
 int main() 
 {

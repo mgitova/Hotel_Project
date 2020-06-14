@@ -3,16 +3,19 @@
 #include <cstring>
 #include <ctime>
 
+///convert a character digit to the corresponding integer
 size_t CalendarDate::getDigit(char c) 
 {
 	return c - '0';
 }
 
+///helper function for checking if the input is a digit
 bool CalendarDate::isDigit(char c) 
 {
 	return c >= '0' && c <= '9';
 }
 
+///check whether the year is a leap year or not
 bool CalendarDate::isLeapYear (size_t year) 
 {
 	if(year % 4 == 0)
@@ -28,9 +31,9 @@ bool CalendarDate::isLeapYear (size_t year)
 		return true;
 	}
 	return false;
-	
 }
 
+///default constructor - the default date is 1970-01-01
 CalendarDate::CalendarDate()
 {
 	this->day = 1;
@@ -38,13 +41,13 @@ CalendarDate::CalendarDate()
 	this->year = 1970;
 }
 
+///parameterized constructor
 CalendarDate::CalendarDate(const char* date)
 {
 	assert(this->isValid(date));
 	this->year = getDigit(date[0])*1000 + getDigit(date[1])*100 + getDigit(date[2])*10 + getDigit(date[3]);
 	this->month = getDigit(date[5])*10 + getDigit(date[6]);
 	this->day = getDigit(date[8])*10 + getDigit(date[9]);
-	
 }
 
 bool CalendarDate::operator< (const CalendarDate& rhs) const
@@ -89,28 +92,32 @@ bool CalendarDate::operator> (const CalendarDate& rhs) const
 {
 	return rhs < *this;
 }
-//lhs >= rhs 
+
+///lhs >= rhs 
 bool CalendarDate::operator>= (const CalendarDate& rhs) const
 {
 	return !(*this < rhs);
 }
-//lhs <= rhs
+
+///lhs <= rhs
 bool CalendarDate::operator<= (const CalendarDate& rhs) const
 {
 	return !(*this > rhs);
 }
-//lhs==rhs
+
+///lhs == rhs
 bool CalendarDate::operator== (const CalendarDate& rhs) const
 {
-	return this->day == rhs.day && this->month == rhs.month && this->year == rhs.year;
-//	return !(rhs < *this) && !(*this < rhs);
+	return !(rhs < *this) && !(*this < rhs);
 }
 
+// !(==)
 bool CalendarDate::operator!= (const CalendarDate& rhs) const
 {
 	return !(rhs == *this);	
 }
 
+///check whether the date is Valid
 bool CalendarDate::isValid(const char* date) 
 {
 	if (date == nullptr)
@@ -118,13 +125,14 @@ bool CalendarDate::isValid(const char* date)
 		return false;
 	}
 	
+	///YYYY-MM-DD
 	size_t length = strlen(date);
 	if (length != 10)
 	{
 		return false;
 	}
 
-	//check year
+	///check year
 	for(int i = 0; i < 4; i++)
 	{
 		if (!isDigit(date[i]))
@@ -138,7 +146,7 @@ bool CalendarDate::isValid(const char* date)
 		return false;
 	}
 	
-	//check month
+	///check month
 	if(!isDigit(date[5]) && !isDigit(date[6]))
 	{
 		return false;
@@ -149,7 +157,7 @@ bool CalendarDate::isValid(const char* date)
 		return false;
 	}
 
-	//check day
+	///check day
 	if(!isDigit(date[8]) && !isDigit(date[9]))
 	{
 		return false;
@@ -203,11 +211,10 @@ bool CalendarDate::isValid(const char* date)
 			}
 		}	
 	}
-	
 	return true;	
-	
 }
 
+///output stream
 std::ostream& operator<< (std::ostream& out, const CalendarDate& other)
 {
 	if(other.year <= 9)
@@ -238,6 +245,7 @@ std::ostream& operator<< (std::ostream& out, const CalendarDate& other)
 	return out;	
 }
 
+///input stream
 std::istream& operator>> (std::istream& is, CalendarDate& other)
 {
 	char arr[1000];
@@ -248,14 +256,15 @@ std::istream& operator>> (std::istream& is, CalendarDate& other)
 	}
 	else
 	{
-		cout <<"\"" <<arr << "\" is invalid date" << endl;
+		cout <<"\"" << arr << "\" is invalid date" << endl;
 		other = CalendarDate();
 		is.setstate(std::ios_base::failbit);
 	}
 	return is;
 	
 }
-	
+
+///returns the current calendar date - http://www.cplusplus.com
 CalendarDate CalendarDate::getDateToday()
 {
 	long long t = time(0);
@@ -269,6 +278,7 @@ CalendarDate CalendarDate::getDateToday()
 	return result;
 }
 
+///checks if two date periods overlap
 bool CalendarDate::areOverlapping(const CalendarDate& dateStart1, const CalendarDate& dateEnd1, 
 								const CalendarDate& dateStart2, const CalendarDate& dateEnd2)
 {
